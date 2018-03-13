@@ -38,7 +38,8 @@ const int pingPin = 7;    //pin which triggers ultrasonic sound
 int inPin = 6;            //pin which delivers time to receive echo using pulseIn()
 int safeZone = 10;        //range in cm which is considered safe to enter, anything coming within less than 10 cm triggers the toilet paper to unroll
 
-void setup() {
+void setup()
+{
   servo.attach(8);          //attach servo motor to pin 8
   servo2.attach(3);         // attach servo motor to pin 3
 }
@@ -61,24 +62,25 @@ void loop()
    
   cm = microsecondsToCentimeters(duration); // convert the time into a distance
   
-  if (cm > safeZone)  //checking if anything is within the safezone
-                              
+  if (cm > safeZone)  //checking if anything is within the safezone                         
   {
-  clockw();
-  delay (3500);
+  delay (4000);
   counterw(); 
+  delay (4000);
+  clockw();
+  delay (4000);
   
   servo.detach(); // turning off the servo when there's not motion
   servo2.detach();
-  
   }
+  
   else
   {
    servo2.attach(3); //Since the servo was detached, making sure it's still turned on 
    servo.attach(8);
-   counterw(); // reversing what it was from the if statement 
-   delay (3500);
-   clockw();
+   clockw(); // reversing what it was from the if statement 
+   delay (4000);
+   counterw();
   }
 
 }
@@ -92,15 +94,15 @@ long microsecondsToCentimeters(long microseconds)
 }
 
 //clockwise
-void clockw() {
+void clockw() 
+{
 servo.write(0);
-servo2.write(180);
-  
+servo2.write(0); 
 }
 
 //counter clock-wise
 void counterw() {
-servo.write (180);
-servo2.write (0);  
+servo.write (165);
+servo2.write (175);  
 }
 
